@@ -45,12 +45,13 @@ function showTask() {
         <div class="view">
           <input class="toggle" type="checkbox" onclick="completeTask()"/>
           <label class="label"> ${ element } </label>
-          <button class="destroy" onclick="deleteTask()"></button>
+          <button class="destroy" onclick="deleteTask(${ index })"></button>
         </div>
         <input class="edit" value="새로운 타이틀" />
       </li>`;
     });
     todoList.innerHTML = newliTag; //adding new li tag inside ul tag
+
 
 }
 
@@ -74,6 +75,13 @@ function completeTask(index) {
     }
 }
 
-function deleteTask() {
-    
+//delete task function
+function deleteTask(index) {
+    let getLocalStorage = localStorage.getItem("New Task"); 
+    listArr = JSON.parse(getLocalStorage);
+    listArr.splice(index, 1); //delete or remove the particular indexed li
+
+    //after remove the li again update the local storage
+    localStorage.setItem("New Task", JSON.stringify(listArr));
+    showTask();
 }
