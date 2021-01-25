@@ -1,6 +1,7 @@
 // List.js
 const taskInput = document.querySelector('.new-todo'); //input tag
 const todoList = document.querySelector('ul.todo-list');
+const todoCount = document.querySelector('.item-count'); //total item count tag(strong tag)
 
 
 showTask(); 
@@ -44,7 +45,7 @@ function showTask() {
         newliTag += `<li>
         <div class="view">
           <input class="toggle" type="checkbox" onclick="completeTask()"/>
-          <label class="label"> ${ element } </label>
+          <label class="label" dblclick="editTask()"> ${ element } </label>
           <button class="destroy" onclick="deleteTask(${ index })"></button>
         </div>
         <input class="edit" value="새로운 타이틀" />
@@ -52,6 +53,8 @@ function showTask() {
     });
     todoList.innerHTML = newliTag; //adding new li tag inside ul tag
 
+    // show total todolist count
+    todoCount.innerHTML = listArr.length;
 
 }
 
@@ -62,14 +65,24 @@ function completeTask(index) {
     // var getLocalStorage = localStorage.getItem("New Task");
     // completeArr = JSON.parse(getLocalStorage);
     // completeArr.
-    
+
+    let getLocalStorage = localStorage.getItem("New Task"); 
+    listArr = JSON.parse(getLocalStorage);
     const checkbox = document.querySelectorAll('div.view .toggle'); // input checkbox
     
     for (var i = 0; i < checkbox.length; i++) {
-        if (checkbox[i].checked ) { //if task is done
+        if (checkbox[i].checked) { //if task is done
             checkbox[i].closest("li").classList.add("completed");
+            /**
+             * move completed task from New task storage to Completed Task
+             */
+            // console.log(checkbox[i].nextElementSibling.innerText);
+            // console.log(i);
+            // let getLocalStorage = localStorage.getItem("Completed Task"); //getting local storage which completed tasks
+            // listArr.splice(i, 1); //delete or remove the particular indexed li
+            // localStorage.setItem("Completed Task", JSON.stringify(checkbox[i].nextElementSibling.innerText));
         }
-        else {
+        else { //if task is not done
             checkbox[i].closest("li").classList.remove("completed");
         }
     }
@@ -84,4 +97,9 @@ function deleteTask(index) {
     //after remove the li again update the local storage
     localStorage.setItem("New Task", JSON.stringify(listArr));
     showTask();
+}
+
+// edit task function //change input mode when you double click input tag
+function editTask() {
+    
 }
