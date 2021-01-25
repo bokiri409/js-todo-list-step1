@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>이벤트 - TODOS</title>
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="../css/style.css" />
   </head>
   <body>
     <div class="todoapp">
@@ -26,10 +26,13 @@
           >
           <ul class="filters">
             <li>
-              <a class="all selected" href="../index.html">전체보기</a>
+              <a class="all" href="../index.html">전체보기</a>
             </li>
             <li>
-              <a class="active" href="../page/active.html" onclick="onlyTodo()"
+              <a
+                class="active selected"
+                href="../page/active.html"
+                onclick="onlyTodo()"
                 >해야할 일</a
               >
             </li>
@@ -41,6 +44,6 @@
       </main>
     </div>
 
-    <script src="./js/List.js"></script>
+    <script src="../js/todoList.js"></script>
   </body>
 </html>

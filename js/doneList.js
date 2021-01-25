@@ -50,16 +50,16 @@ function showTask() {
     }
 
     var newliTag = '';
-    listArr.forEach((element, index) => {
-        newliTag += `<li>
-        <div class="view-new">
-          <input class="toggle" type="checkbox" onclick="completeTask()"/>
-          <label class="label" dblclick="editTask()"> ${ element } </label>
-          <button class="destroy" onclick="deleteNewTask(${ index })"></button>
-        </div>
-        <input class="edit" value="새로운 타이틀" />
-      </li>`;
-    });
+    // listArr.forEach((element, index) => {
+    //     newliTag += `<li>
+    //     <div class="view-new">
+    //       <input class="toggle" type="checkbox" onclick="completeTask()"/>
+    //       <label class="label" dblclick="editTask()"> ${ element } </label>
+    //       <button class="destroy" onclick="deleteNewTask(${ index })"></button>
+    //     </div>
+    //     <input class="edit" value="새로운 타이틀" />
+    //   </li>`;
+    // });
     doneArr.forEach((element, index) => {
         newliTag += `<li class="completed">
         <div class="view-done">
@@ -73,7 +73,7 @@ function showTask() {
     todoList.innerHTML = newliTag; //adding new li tag inside ul tag
 
     // show total todolist count
-    todoCount.innerHTML = listArr.length + doneArr.length;
+    todoCount.innerHTML = doneArr.length;
 
 }
 
@@ -120,16 +120,6 @@ function completeTask() {
 }
 
 //delete task function
-function deleteNewTask(index) {
-    let getLocalStorage_newTask = localStorage.getItem("New Task"); 
-    listArr = JSON.parse(getLocalStorage_newTask);
-    listArr.splice(index, 1); //delete or remove the particular indexed li
-
-    //after remove the li again update the local storage
-    localStorage.setItem("New Task", JSON.stringify(listArr));
-    showTask();
-}
-
 function deleteDoneTask(index) {
     let getLocalStorage_completedTask = localStorage.getItem("Completed Task"); 
     doneArr = JSON.parse(getLocalStorage_completedTask);
